@@ -6,7 +6,7 @@ include:
 
 build:client:docker:
   tags:
-    - mender-qa-worker-generic-light
+    - hetzner-amd-beefy
   stage: build
   only:
     variables:
@@ -16,9 +16,9 @@ build:client:docker:
   needs:
     - init:workspace
   allow_failure: false
-  image: docker
+  image:  ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker
   services:
-    - docker:dind
+    - ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:dind
   before_script:
     # Default value, will later be overwritten if successful
     - echo "failure" > /JOB_RESULT.txt
